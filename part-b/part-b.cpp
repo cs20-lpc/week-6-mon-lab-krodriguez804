@@ -33,3 +33,25 @@ int main() {
     // terminate
     return 0;
 }
+
+// Time complexity: 
+void towerHanoi(int numDisks, string source, string buffer, string target,
+     int& numMoves){
+
+    if(numDisks == 1) {
+        cout << "Moving disc " << numDisks << " from " << source <<
+        " to " << target << endl;
+
+        numMoves++;
+    }
+
+    else if(numDisks > 1) {
+        towerHanoi(numDisks - 1, source, target, buffer, numMoves);
+        cout << "Moving disc " << numDisks << " from " << source << " to " <<
+        target << endl;
+
+        numMoves++;
+
+        towerHanoi(numDisks - 1, buffer, source, target, numMoves);
+    }
+}
