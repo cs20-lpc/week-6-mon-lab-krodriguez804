@@ -8,17 +8,51 @@ using namespace std;
 /*******************************************************************************
  * Function prototype
 *******************************************************************************/
-
+// Time complexity: O(n)
 template <typename T>
-T findMaxRecTail(const T[] arr, const int size, int = 0)
+T findMaxRecTail(const T arr[], const int size, int i = 0)
 {
     // TO DO: Implement your code
+    T tailMax; // define variable for max of tail
+
+    if (i == size - 1) { // base case
+        return arr[i];
+    }    
+
+    tailMax = findMaxRecTail(arr, size, i + 1); // recursive - find max of tail
+
+    if (tailMax > arr[i]) { // returns max of tail or head whichever >
+        return tailMax;
+    }
+    else {
+        return arr[i];
+    }
 }
 
+// Time complexity: O(n/2)
 template <typename T>
-T findMaxRecBinarySplit(const T[] arr, const int left, const int right)
+T findMaxRecBinarySplit(const T arr[], const int left, const int right)
 {
     // TO DO: Implement your code
+
+    if (left == right) { // base case
+        return arr[left];
+    }
+
+    int mid = (left + right) / 2; // find middle of array
+
+    T leftMax;  // define variables for left and right max
+    T rightMax;
+
+    leftMax = findMaxRecBinarySplit(arr, left, mid); // recursive: from left to middle
+    rightMax = findMaxRecBinarySplit(arr, mid + 1, right); // from middle + 1 to right
+
+    if (leftMax > rightMax) {
+        return leftMax;
+    }
+    else {
+        return rightMax;
+    }
 }
 /*******************************************************************************
  * Description:
